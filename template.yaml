@@ -1,0 +1,21 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Minimal lambda containers example
+
+Parameters:
+  Namespace:
+    Type: String
+    Default: ''
+      
+Resources:
+  ContainerFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./lambda
+    Properties:
+      FunctionName: !Sub "ContainerFunction${Namespace}"
+      PackageType: Image
+      Timeout: 900
+      MemorySize: 10240
