@@ -1,8 +1,8 @@
 .EXPORT_ALL_VARIABLES:
 BUCKET = $(shell aws ssm get-parameter --name /account/app-bucket | jq -r .Parameter.Value)
 ACCOUNT = $(shell aws sts get-caller-identity | jq --raw-output .Account)
-.PHONY: create_repositiry
-create_repositiry: 
+.PHONY: create_repository
+create_repository: 
 	aws ecr create-repository --repository-name container-lambda --image-scanning-configuration scanOnPush=true
 
 .PHONY: build
